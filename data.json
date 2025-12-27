@@ -76,5 +76,18 @@
       "Diễn viên Nguyễn Cao Kỳ Duyên": 123,
       "Diễn viên Ninh Dương Lan Ngọc": 199
     }
+  },
+  {
+    "time": "17:09 27/12",
+    "votes": {
+      "Ca sĩ Tóc Tiên": 87739,
+      "Diễn viên Nguyễn Cao Kỳ Duyên": 85267,
+      "Diễn viên Ninh Dương Lan Ngọc": 46642
+    },
+    "increase": {
+      "Ca sĩ Tóc Tiên": 1274,
+      "Diễn viên Nguyễn Cao Kỳ Duyên": 468,
+      "Diễn viên Ninh Dương Lan Ngọc": 250
+    }
   }
 ]
