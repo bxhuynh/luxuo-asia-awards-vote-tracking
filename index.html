@@ -168,6 +168,13 @@
         }
       }
     </style>
+
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
   </head>
   <body>
     <div class="container">
@@ -258,7 +265,7 @@
 
       async function fetchData() {
         try {
-          const res = await fetch('data.json');
+          const res = await fetch(`data.json?t=${new Date().getTime()}`);
           const data = await res.json();
           render(data);
         } catch (e) {
