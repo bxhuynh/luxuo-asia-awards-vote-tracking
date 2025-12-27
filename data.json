@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "time": "15:38 27/12",
+    "votes": {
+      "Ca sĩ Tóc Tiên": 83182,
+      "Diễn viên Nguyễn Cao Kỳ Duyên": 80474,
+      "Diễn viên Ninh Dương Lan Ngọc": 45678
+    },
+    "increase": {
+      "Ca sĩ Tóc Tiên": 0,
+      "Diễn viên Nguyễn Cao Kỳ Duyên": 0,
+      "Diễn viên Ninh Dương Lan Ngọc": 0
+    }
+  }
+]
