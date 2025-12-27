@@ -3,7 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Advanced Analytics - Tóc Tiên</title>
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Analytics Report - Tóc Tiên</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
       :root {
@@ -31,11 +37,28 @@
         margin: auto;
       }
 
-      /* Banner kêu gọi bình chọn */
+      /* Header */
+      header {
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .live-tag {
+        font-size: 11px;
+        background: rgba(255, 45, 85, 0.1);
+        padding: 4px 12px;
+        border-radius: 20px;
+        color: var(--toc-tien);
+        font-weight: bold;
+        border: 1px solid var(--toc-tien);
+      }
+
+      /* CTA Banner */
       .cta-banner {
         background: linear-gradient(
           90deg,
-          rgba(255, 45, 85, 0.2) 0%,
+          rgba(255, 45, 85, 0.15) 0%,
           rgba(22, 27, 34, 1) 100%
         );
         border: 1px solid var(--toc-tien);
@@ -45,17 +68,11 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        box-shadow: 0 0 20px rgba(255, 45, 85, 0.15);
       }
       .cta-content h2 {
         margin: 0;
         color: #fff;
         font-size: 1.4rem;
-      }
-      .cta-content p {
-        margin: 8px 0 0;
-        color: var(--text-main);
-        font-size: 0.95rem;
       }
       .btn-vote {
         background: var(--toc-tien);
@@ -64,16 +81,15 @@
         padding: 12px 25px;
         border-radius: 8px;
         font-weight: 700;
-        transition: all 0.3s ease;
-        white-space: nowrap;
-        box-shadow: 0 4px 15px rgba(255, 45, 85, 0.4);
+        transition: 0.3s;
+        box-shadow: 0 4px 15px rgba(255, 45, 85, 0.3);
       }
       .btn-vote:hover {
         transform: scale(1.05);
         filter: brightness(1.2);
       }
 
-      /* Widget Stats */
+      /* Widgets */
       .stats-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -88,10 +104,8 @@
       }
       .widget-label {
         font-size: 12px;
-        font-weight: 600;
         color: #8b949e;
         text-transform: uppercase;
-        letter-spacing: 1px;
       }
       .widget-value {
         font-size: 32px;
@@ -99,18 +113,13 @@
         color: var(--text-bright);
         margin: 10px 0;
       }
-      .widget-footer {
-        font-size: 13px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
       .trend-up {
         color: #3fb950;
         font-weight: bold;
+        font-size: 14px;
       }
 
-      /* Layout Charts */
+      /* Charts */
       .main-grid {
         display: grid;
         grid-template-columns: 2fr 1fr;
@@ -118,137 +127,97 @@
         margin-bottom: 25px;
       }
 
-      /* Table Style */
+      /* Table */
       .table-container {
         background: var(--bg-card);
         border: 1px solid var(--border);
         border-radius: 12px;
         overflow: hidden;
-        margin-top: 20px;
       }
       table {
         width: 100%;
         border-collapse: collapse;
-        text-align: left;
         font-size: 14px;
       }
       th {
         background: #21262d;
         padding: 15px;
+        text-align: left;
         color: #8b949e;
-        font-weight: 500;
       }
       td {
         padding: 15px;
         border-top: 1px solid var(--border);
-      }
-      .name-cell {
-        font-weight: 600;
-        color: var(--text-bright);
-      }
-      .delta-cell {
-        font-size: 12px;
-        color: #3fb950;
-      }
-      tr:hover {
-        background: rgba(255, 255, 255, 0.02);
       }
       .highlight-row {
         background: rgba(255, 45, 85, 0.05);
       }
 
       @media (max-width: 900px) {
+        .main-grid {
+          grid-template-columns: 1fr;
+        }
         .cta-banner {
           flex-direction: column;
           text-align: center;
           gap: 20px;
         }
-        .main-grid {
-          grid-template-columns: 1fr;
-        }
       }
     </style>
-
-    <meta
-      http-equiv="Cache-Control"
-      content="no-cache, no-store, must-revalidate"
-    />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
   </head>
   <body>
     <div class="container">
-      <div
-        style="
-          margin-bottom: 30px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        "
-      >
+      <header>
         <div>
           <h1 style="color: var(--text-bright); margin: 0">
             LUXUO ASIA AWARDS 2025
           </h1>
           <p
             id="update-info"
-            style="color: #8b949e; font-size: 14px; margin: 5px 0 0"
-          ></p>
+            style="color: #8b949e; font-size: 13px; margin-top: 5px"
+          >
+            Đang tải dữ liệu...
+          </p>
         </div>
-        <div
-          style="
-            font-size: 12px;
-            background: #21262d;
-            padding: 5px 12px;
-            border-radius: 20px;
-            color: var(--toc-tien);
-          "
-        >
-          ● LIVE TRACKING
-        </div>
-      </div>
+        <div class="live-tag">● LIVE TRACKING</div>
+      </header>
 
       <div class="cta-banner">
         <div class="cta-content">
           <h2>Ủng hộ Ca sĩ Tóc Tiên</h2>
           <p>
-            Tham gia hành trình chinh phục LUXUO ASIA AWARDS 2025 ngay hôm nay!
+            Bình chọn ngay để tiếp sức cho Tóc Tiên trong hành trình năm nay!
           </p>
         </div>
         <a
           href="https://luxuoasiaawards2025.1vote.vn/thi-sinh/dwdyc/ca-si-toc-tien-fNK9"
           target="_blank"
           class="btn-vote"
+          >BÌNH CHỌN NGAY ↗</a
         >
-          BÌNH CHỌN NGAY ↗
-        </a>
       </div>
 
       <div class="stats-grid" id="stat-widgets"></div>
 
       <div class="main-grid">
         <div class="widget">
-          <div class="widget-label">Xu hướng thay đổi tổng lượt vote</div>
+          <div class="widget-label">Xu hướng Vote</div>
           <canvas id="mainChart" height="150"></canvas>
         </div>
         <div class="widget">
-          <div class="widget-label">Phân bổ tăng trưởng mới nhất</div>
+          <div class="widget-label">Cơ cấu tăng trưởng 15p gần nhất</div>
           <canvas id="pieChart"></canvas>
         </div>
       </div>
 
-      <div class="widget-label" style="margin-bottom: 10px">
-        Lịch sử thay đổi chi tiết
-      </div>
       <div class="table-container">
         <table>
           <thead>
             <tr>
               <th>Thời gian</th>
-              <th>Tên ứng viên</th>
+              <th>Ứng viên</th>
               <th>Tổng Vote</th>
               <th>Tăng (15p)</th>
-              <th>Trạng thái</th>
             </tr>
           </thead>
           <tbody id="comparison-table"></tbody>
@@ -263,26 +232,30 @@
         'Diễn viên Ninh Dương Lan Ngọc': '#f2cc60',
       };
 
+      // Khai báo instance toàn cục để tránh lỗi "Canvas in use"
+      let mainChartInstance = null;
+      let pieChartInstance = null;
+
       async function fetchData() {
         try {
+          // Thêm timestamp để phá cache trình duyệt
           const res = await fetch(`data.json?t=${new Date().getTime()}`);
           const data = await res.json();
-          render(data);
+          if (data && data.length > 0) render(data);
         } catch (e) {
-          console.error('Không thể tải dữ liệu', e);
+          console.error('Lỗi tải dữ liệu:', e);
         }
       }
 
       function render(data) {
-        if (!data || data.length === 0) return;
         const latest = data[data.length - 1];
         const names = Object.keys(latest.votes);
 
         document.getElementById(
           'update-info'
-        ).innerText = `Dữ liệu đồng bộ lần cuối: ${latest.time}`;
+        ).innerText = `Đồng bộ (Giờ VN): ${latest.time}`;
 
-        // 1. Render Widgets
+        // 1. Cập nhật Widgets
         const widgetContainer = document.getElementById('stat-widgets');
         widgetContainer.innerHTML = names
           .map(
@@ -292,79 +265,50 @@
                 <div class="widget-value">${latest.votes[
                   name
                 ].toLocaleString()}</div>
-                <div class="widget-footer">
-                    <span class="trend-up">▲ +${latest.increase[
-                      name
-                    ].toLocaleString()}</span> 
-                    <span style="color: #8b949e">từ 15p trước</span>
-                </div>
+                <div class="trend-up">▲ +${latest.increase[
+                  name
+                ].toLocaleString()}</div>
             </div>
         `
           )
           .join('');
 
-        // 2. Render Table
-        const tableBody = document.getElementById('comparison-table');
-        const displayData = data.slice(-5).reverse();
-        let tableHtml = '';
-        displayData.forEach((entry) => {
-          names.forEach((name, idx) => {
-            const isTocTien = name.includes('Tóc Tiên');
-            tableHtml += `
-                    <tr class="${isTocTien ? 'highlight-row' : ''}">
-                        ${
-                          idx === 0
-                            ? `<td rowspan="${names.length}" style="vertical-align:top; color:#8b949e; border-right: 1px solid var(--border)">${entry.time}</td>`
-                            : ''
-                        }
-                        <td class="name-cell" style="color: ${
-                          COLORS[name]
-                        }">${name}</td>
-                        <td>${entry.votes[name].toLocaleString()}</td>
-                        <td class="delta-cell">+${entry.increase[
-                          name
-                        ].toLocaleString()}</td>
-                        <td><span style="color: ${
-                          entry.increase[name] > 0 ? '#3fb950' : '#8b949e'
-                        }">● ${
-              entry.increase[name] > 0 ? 'Active' : 'Stable'
-            }</span></td>
-                    </tr>
-                `;
-          });
-        });
-        tableBody.innerHTML = tableHtml;
+        // 2. Vẽ lại Biểu đồ đường
+        const ctxMain = document.getElementById('mainChart').getContext('2d');
+        if (mainChartInstance) mainChartInstance.destroy(); // Hủy biểu đồ cũ
 
-        // 3. Render Chart
-        Chart.defaults.color = '#8b949e';
-        new Chart(document.getElementById('mainChart'), {
+        mainChartInstance = new Chart(ctxMain, {
           type: 'line',
           data: {
             labels: data.map((d) => d.time),
             datasets: names.map((name) => ({
-              label: name,
+              label: name.split(' ').pop(),
               data: data.map((d) => d.votes[name]),
               borderColor: COLORS[name],
+              tension: 0.3,
+              pointRadius: 2,
+              borderWidth: name.includes('Tóc Tiên') ? 4 : 2,
+              fill: name.includes('Tóc Tiên'),
               backgroundColor: name.includes('Tóc Tiên')
                 ? 'rgba(255, 45, 85, 0.1)'
                 : 'transparent',
-              tension: 0.3,
-              pointRadius: 2,
-              fill: name.includes('Tóc Tiên'),
-              borderWidth: name.includes('Tóc Tiên') ? 4 : 2,
             })),
           },
           options: {
+            responsive: true,
             plugins: { legend: { display: false } },
             scales: {
-              y: { grid: { color: '#21262d' }, ticks: { font: { size: 10 } } },
-              x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+              y: { grid: { color: '#21262d' } },
+              x: { grid: { display: false } },
             },
           },
         });
 
-        // 4. Pie Chart
-        new Chart(document.getElementById('pieChart'), {
+        // 3. Vẽ lại Biểu đồ tròn
+        const ctxPie = document.getElementById('pieChart').getContext('2d');
+        if (pieChartInstance) pieChartInstance.destroy(); // Hủy biểu đồ cũ
+
+        pieChartInstance = new Chart(ctxPie, {
           type: 'doughnut',
           data: {
             labels: names.map((n) => n.split(' ').pop()),
@@ -381,11 +325,39 @@
             plugins: { legend: { position: 'bottom' } },
           },
         });
+
+        // 4. Cập nhật Bảng (5 mốc gần nhất)
+        const tableBody = document.getElementById('comparison-table');
+        const recentData = data.slice(-5).reverse();
+        let tableHtml = '';
+        recentData.forEach((entry) => {
+          names.forEach((name, idx) => {
+            const isTT = name.includes('Tóc Tiên');
+            tableHtml += `
+                    <tr class="${isTT ? 'highlight-row' : ''}">
+                        ${
+                          idx === 0
+                            ? `<td rowspan="${names.length}" style="color:#8b949e; border-right: 1px solid var(--border)">${entry.time}</td>`
+                            : ''
+                        }
+                        <td style="font-weight:600; color:${
+                          COLORS[name]
+                        }">${name}</td>
+                        <td>${entry.votes[name].toLocaleString()}</td>
+                        <td style="color:#3fb950; font-weight:bold">+${entry.increase[
+                          name
+                        ].toLocaleString()}</td>
+                    </tr>
+                `;
+          });
+        });
+        tableBody.innerHTML = tableHtml;
       }
 
+      // Khởi chạy
       fetchData();
-      // Tự động cập nhật mỗi 5 phút mà không cần tải lại trang
-      setInterval(fetchData, 300000);
+      // Tự động tải lại mỗi 5 phút (300.000 ms)
+      setInterval(fetchData, 5 * 60 * 1000);
     </script>
   </body>
 </html>

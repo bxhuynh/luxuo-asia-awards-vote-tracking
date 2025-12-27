@@ -1,7 +1,7 @@
 import requests
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 API_URL = "https://eventista-platform-api.1vote.vn/v1/internal/tenants/TODa16/products?eventId=EVENT_bA8rc"
 
@@ -41,9 +41,15 @@ def main():
     current_votes = get_votes_from_api()
     if not current_votes: return
 
-    # Thời gian định dạng VN
-    timestamp = datetime.now().strftime("%H:%M %d/%m")
+    # Tạo múi giờ Việt Nam
+    vn_tz = timezone(timedelta(hours=7))
 
+    # Lấy thời gian hiện tại chính xác theo múi giờ VN
+    vietnam_now = datetime.now(vn_tz)
+
+    # Định dạng chuỗi
+    timestamp = vietnam_now.strftime("%H:%M %d/%m")
+    
     # Tính lượng tăng (Delta)
     increase = {}
     if history:
