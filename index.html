@@ -9,7 +9,6 @@
     />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-
     <meta property="og:type" content="website" />
     <meta
       property="og:url"
@@ -49,7 +48,6 @@
     <title>LUXUO ASIA AWARDS 2025 - Live Dashboard</title>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -71,37 +69,31 @@
       * {
         box-sizing: border-box;
       }
-
       body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: 'Inter', -apple-system, sans-serif;
         background: var(--bg-body);
         color: var(--text-main);
         margin: 0;
         padding: 0;
         line-height: 1.5;
       }
-
       .container {
         max-width: 1140px;
         margin: 40px auto;
         padding: 0 20px;
       }
-
       header {
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
         margin-bottom: 32px;
       }
-
       h1 {
         font-size: 24px;
         font-weight: 700;
         color: var(--text-bright);
         margin: 0;
-        letter-spacing: -0.5px;
       }
-
       .live-indicator {
         display: flex;
         align-items: center;
@@ -114,7 +106,6 @@
         border-radius: 100px;
         border: 1px solid rgba(255, 45, 85, 0.2);
       }
-
       .pulse {
         width: 8px;
         height: 8px;
@@ -122,7 +113,6 @@
         border-radius: 50%;
         animation: pulse-animation 2s infinite;
       }
-
       @keyframes pulse-animation {
         0% {
           box-shadow: 0 0 0 0px rgba(255, 45, 85, 0.7);
@@ -142,7 +132,6 @@
         justify-content: space-between;
         align-items: center;
       }
-
       .btn-vote {
         background: var(--toc-tien);
         color: white;
@@ -154,12 +143,6 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        box-shadow: 0 4px 12px rgba(255, 45, 85, 0.2);
-      }
-
-      .btn-vote:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(255, 45, 85, 0.4);
       }
 
       .stats-grid {
@@ -168,14 +151,12 @@
         gap: 20px;
         margin-bottom: 32px;
       }
-
       .widget {
         background: var(--bg-card);
         border: 1px solid var(--border);
         padding: 24px;
         border-radius: 16px;
       }
-
       .widget-label {
         font-size: 13px;
         font-weight: 500;
@@ -185,24 +166,18 @@
         gap: 8px;
         text-transform: uppercase;
       }
-
       .dot {
         width: 8px;
         height: 8px;
         border-radius: 50%;
       }
-
       .widget-value {
         font-size: 32px;
         font-weight: 700;
         color: var(--text-bright);
         margin-bottom: 8px;
-        letter-spacing: -1px;
       }
-
       .trend-tag {
-        display: inline-flex;
-        align-items: center;
         font-size: 13px;
         font-weight: 600;
         color: var(--accent);
@@ -218,7 +193,6 @@
         border-radius: 16px;
         margin-bottom: 32px;
       }
-
       .chart-title {
         font-size: 12px;
         font-weight: 600;
@@ -226,14 +200,12 @@
         color: var(--text-main);
         text-transform: uppercase;
       }
-
       .table-card {
         background: var(--bg-card);
         border: 1px solid var(--border);
         border-radius: 16px;
         overflow: hidden;
       }
-
       .table-header {
         padding: 20px 24px;
         border-bottom: 1px solid var(--border);
@@ -257,7 +229,6 @@
         padding: 16px 24px;
         border-bottom: 1px solid var(--border);
       }
-
       .vote-num {
         font-weight: 600;
         color: var(--text-bright);
@@ -296,7 +267,7 @@
             id="update-info"
             style="font-size: 13px; margin-top: 6px; color: var(--text-main)"
           >
-            Đang tải dữ liệu...
+            Đang tải...
           </div>
         </div>
         <div class="live-indicator">
@@ -311,7 +282,7 @@
             Ủng hộ Ca sĩ Tóc Tiên
           </h2>
           <p style="margin: 0; font-size: 14px; color: var(--text-main)">
-            Số liệu bình chọn được cập nhật tự động liên tục.
+            Số liệu cập nhật tự động liên tục mỗi 5 phút.
           </p>
         </div>
         <a
@@ -326,9 +297,7 @@
 
       <div class="chart-container">
         <div class="chart-title">Biểu đồ xu hướng tổng Vote</div>
-        <div style="height: 350px">
-          <canvas id="mainChart"></canvas>
-        </div>
+        <div style="height: 350px"><canvas id="mainChart"></canvas></div>
       </div>
 
       <div class="table-card">
@@ -350,6 +319,13 @@
     </div>
 
     <script>
+      // ĐỊNH NGHĨA THỨ TỰ CỐ ĐỊNH ĐỂ TRÁNH SAI SỐ LIỆU KHI DATA NHẢY VỊ TRÍ
+      const FIXED_ORDER = [
+        'Ca sĩ Tóc Tiên',
+        'Diễn viên Nguyễn Cao Kỳ Duyên',
+        'Diễn viên Ninh Dương Lan Ngọc',
+      ];
+
       const COLORS = {
         'Ca sĩ Tóc Tiên': '#ff2d55',
         'Diễn viên Nguyễn Cao Kỳ Duyên': '#38bdf8',
@@ -370,31 +346,27 @@
 
       function render(data) {
         const latest = data[data.length - 1];
-        const names = Object.keys(latest.votes);
-
         document.getElementById(
           'update-info'
         ).innerText = `Dữ liệu mới nhất lúc: ${latest.time}`;
 
-        // 1. Render Widgets
-        document.getElementById('stat-widgets').innerHTML = names
-          .map(
-            (name) => `
-          <div class="widget">
-            <div class="widget-label">
-              <span class="dot" style="background:${COLORS[name]}"></span>
-              ${name.split(' ').pop()}
-            </div>
-            <div class="widget-value">${latest.votes[
-              name
-            ].toLocaleString()}</div>
-            <div class="trend-tag">▲ +${latest.increase[
-              name
-            ].toLocaleString()}</div>
-          </div>
-        `
-          )
-          .join('');
+        // 1. Render Widgets theo thứ tự cố định
+        document.getElementById('stat-widgets').innerHTML = FIXED_ORDER.map(
+          (name) => {
+            const voteCount = latest.votes[name] || 0;
+            const incCount = latest.increase[name] || 0;
+            return `
+              <div class="widget">
+                <div class="widget-label">
+                  <span class="dot" style="background:${COLORS[name]}"></span>
+                  ${name.split(' ').pop()}
+                </div>
+                <div class="widget-value">${voteCount.toLocaleString()}</div>
+                <div class="trend-tag">▲ +${incCount.toLocaleString()}</div>
+              </div>
+            `;
+          }
+        ).join('');
 
         // 2. Render Biểu đồ đường
         const ctxMain = document.getElementById('mainChart').getContext('2d');
@@ -403,9 +375,9 @@
           type: 'line',
           data: {
             labels: data.map((d) => d.time),
-            datasets: names.map((name) => ({
+            datasets: FIXED_ORDER.map((name) => ({
               label: name.split(' ').pop(),
-              data: data.map((d) => d.votes[name]),
+              data: data.map((d) => d.votes[name] || 0),
               borderColor: COLORS[name],
               backgroundColor: name.includes('Tóc Tiên')
                 ? 'rgba(255, 45, 85, 0.08)'
@@ -415,7 +387,6 @@
               borderWidth: 3,
               pointRadius: 1,
               pointHoverRadius: 6,
-              pointHitRadius: 15,
             })),
           },
           options: {
@@ -426,15 +397,12 @@
               legend: {
                 position: 'top',
                 align: 'end',
-                labels: { color: '#8b949e', boxWidth: 10, padding: 20 },
+                labels: { color: '#8b949e', boxWidth: 10 },
               },
               tooltip: {
                 backgroundColor: '#1c2128',
-                titleColor: '#8b949e',
-                bodyColor: '#fff',
                 borderColor: '#30363d',
                 borderWidth: 1,
-                padding: 12,
                 usePointStyle: true,
                 callbacks: {
                   label: (ctx) =>
@@ -445,17 +413,14 @@
             scales: {
               y: {
                 grid: { color: 'rgba(255,255,255,0.05)' },
-                ticks: { color: '#8b949e', font: { size: 11 } },
+                ticks: { color: '#8b949e' },
               },
-              x: {
-                grid: { display: false },
-                ticks: { color: '#8b949e', font: { size: 11 } },
-              },
+              x: { grid: { display: false }, ticks: { color: '#8b949e' } },
             },
           },
         });
 
-        // 3. Render Bảng
+        // 3. Render Bảng theo thứ tự cột cố định (Tóc Tiên -> Kỳ Duyên -> Lan Ngọc)
         const tableBody = document.getElementById('comparison-table');
         tableBody.innerHTML = [...data]
           .reverse()
@@ -465,18 +430,18 @@
             <td style="color: var(--text-main); font-size: 13px;">${
               entry.time
             }</td>
-            ${names
-              .map(
-                (n) => `
+            ${FIXED_ORDER.map(
+              (name) => `
               <td>
-                <div class="vote-num">${entry.votes[n].toLocaleString()}</div>
-                <div class="inc-num">▲ ${entry.increase[
-                  n
-                ].toLocaleString()}</div>
+                <div class="vote-num">${(
+                  entry.votes[name] || 0
+                ).toLocaleString()}</div>
+                <div class="inc-num">▲ ${(
+                  entry.increase[name] || 0
+                ).toLocaleString()}</div>
               </td>
             `
-              )
-              .join('')}
+            ).join('')}
           </tr>
         `
           )
@@ -484,7 +449,7 @@
       }
 
       fetchData();
-      setInterval(fetchData, 300000); // 5 phút
+      setInterval(fetchData, 300000);
     </script>
   </body>
 </html>
