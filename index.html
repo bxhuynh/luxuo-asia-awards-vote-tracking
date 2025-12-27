@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Theo dõi lượt Vote</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <h1>So sánh lượt tăng trưởng Vote (Mỗi 15p)</h1>
+    <canvas id="myChart" width="400" height="200"></canvas>
+
+    <script>
+      fetch('data.json')
+        .then((response) => response.json())
+        .then((data) => {
+          const labels = data.map((item) => item.timestamp);
+          const p1Data = data.map((item) => item.increase.nktt);
+          const p2Data = data.map((item) => item.increase.nckd);
+          const p3Data = data.map((item) => item.increase.ndln);
+
+          new Chart(document.getElementById('myChart'), {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: 'Người 1',
+                  data: p1Data,
+                  borderColor: 'red',
+                  fill: false,
+                },
+                {
+                  label: 'Người 2',
+                  data: p2Data,
+                  borderColor: 'blue',
+                  fill: false,
+                },
+                {
+                  label: 'Người 3',
+                  data: p3Data,
+                  borderColor: 'green',
+                  fill: false,
+                },
+              ],
+            },
+          });
+        });
+    </script>
+  </body>
+</html>

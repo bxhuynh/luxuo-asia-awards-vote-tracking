@@ -1,0 +1,32 @@
+name: Scrape Votes Every 15 Mins
+
+on:
+  schedule:
+    - cron: '*/15 * * * *' # Chạy mỗi 15 phút
+  workflow_dispatch: # Cho phép bấm nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Run scraper
+        run: python scraper.py
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "Scraper Bot"
+          git config --global user.email "bot@github.com"
+          git add data.json
+          git commit -m "Update votes: $(date)" || exit 0
+          git push
