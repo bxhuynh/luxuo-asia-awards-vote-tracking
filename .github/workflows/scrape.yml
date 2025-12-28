@@ -1,10 +1,9 @@
 name: Scrape Votes
 
 on:
-  schedule:
-    - cron: '*/15 * * * *'
   workflow_dispatch: # Cho phép bấm nút chạy thủ công
-
+  repository_dispatch:
+    types: [manual_trigger] # Tên sự kiện này sẽ dùng ở Bước 3
 jobs:
   build:
     runs-on: ubuntu-latest
