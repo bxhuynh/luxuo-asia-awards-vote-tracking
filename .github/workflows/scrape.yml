@@ -1,8 +1,8 @@
-name: Scrape Votes Every 15 Mins
+name: Scrape Votes
 
 on:
   schedule:
-    - cron: '*/15 * * * *' # Chạy mỗi 15 phút
+    - cron: '*/10 * * * *'
   workflow_dispatch: # Cho phép bấm nút chạy thủ công
 
 jobs:
