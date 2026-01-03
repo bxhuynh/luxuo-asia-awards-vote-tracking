@@ -1,18 +1,5 @@
 [
   {
-    "time": "16:45 02/01",
-    "votes": {
-      "Ca sĩ Tóc Tiên": 521234,
-      "Diễn viên Nguyễn Cao Kỳ Duyên": 520232,
-      "Diễn viên Ninh Dương Lan Ngọc": 92410
-    },
-    "increase": {
-      "Ca sĩ Tóc Tiên": 117,
-      "Diễn viên Nguyễn Cao Kỳ Duyên": 95,
-      "Diễn viên Ninh Dương Lan Ngọc": 62
-    }
-  },
-  {
     "time": "17:00 02/01",
     "votes": {
       "Ca sĩ Tóc Tiên": 521332,
@@ -1297,6 +1284,19 @@
       "Ca sĩ Tóc Tiên": 81,
       "Diễn viên Nguyễn Cao Kỳ Duyên": 119,
       "Diễn viên Ninh Dương Lan Ngọc": 15
+    }
+  },
+  {
+    "time": "17:45 03/01",
+    "votes": {
+      "Ca sĩ Tóc Tiên": 534497,
+      "Diễn viên Nguyễn Cao Kỳ Duyên": 532393,
+      "Diễn viên Ninh Dương Lan Ngọc": 95557
+    },
+    "increase": {
+      "Ca sĩ Tóc Tiên": 78,
+      "Diễn viên Nguyễn Cao Kỳ Duyên": 117,
+      "Diễn viên Ninh Dương Lan Ngọc": 19
     }
   }
 ]
